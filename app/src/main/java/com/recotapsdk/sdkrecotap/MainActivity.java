@@ -1,9 +1,12 @@
 package com.recotapsdk.sdkrecotap;
 
 import android.Manifest;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.recotapsdk.recotap_sdk.Recotap;
@@ -22,19 +25,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Recotap recotap = new Recotap("nGaMdfY59CRfMy0n8YBAmDdUGpV8Tu");
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        recotap.getInstance(this, getApplicationContext());
+        Button button = (Button)findViewById(R.id.click);
 
-        HashMap<String, String> loginDetails = new HashMap<>();
+        final Recotap recotap = new Recotap("nGaMdfY59CRfMy0n8YBAmDdUGpV8Tu");
+
+        recotap.getInstance(this);
+
+        final HashMap<String, String> loginDetails = new HashMap<>();
         loginDetails.put("user_id", "12345");
         loginDetails.put("username", "Souptik");
         loginDetails.put("email", "souptik@impel.io");
         loginDetails.put("age", "49");
         loginDetails.put("gender", "M");
-
-        recotap.login(loginDetails);
-
 
         HashMap<String, String> eventDetails = new HashMap<>();
         eventDetails.put("video_id", "12345");
@@ -44,7 +49,16 @@ public class MainActivity extends AppCompatActivity {
         recotap.emit("Video Paused", eventDetails);
         recotap.emit("Video Stopped", eventDetails);
 
-        recotap.logout();
+        final HashMap<String, String> logoutDetails = new HashMap<>();
+        logoutDetails.put("12345", "Logged Out");
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recotap.login(loginDetails);
+                recotap.logout(logoutDetails);
+            }
+        });
 
     }
 
