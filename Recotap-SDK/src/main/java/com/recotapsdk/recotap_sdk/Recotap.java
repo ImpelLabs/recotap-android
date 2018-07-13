@@ -74,7 +74,9 @@ public class Recotap{
 
     }
 
-    public void login(HashMap loginDetails) {
+    public Integer login(HashMap loginDetails) {
+
+        Integer test = null;
 
         try {
 
@@ -87,7 +89,7 @@ public class Recotap{
 
                 String json = jsonArray.toString();
 
-                Integer test = post(API_URL, json, "Bearer " + token.getString("token"));
+                test= post(API_URL, json, "Bearer " + token.getString("token"));
                 Log.i("RecotapDetails " + 3.5, String.valueOf(test));
             }
 
@@ -95,6 +97,7 @@ public class Recotap{
             e.printStackTrace();
         }
 
+        return test;
     }
 
     public void emit(String eventName, HashMap eventData) {
@@ -102,7 +105,9 @@ public class Recotap{
         Log.i("RecotapDetails " + 4, eventName + " " + String.valueOf(jsonObject));
     }
 
-    public void logout(HashMap user) {
+    public Integer logout(HashMap user) {
+
+        Integer response = null;
 
         try {
             JSONObject jsonObject = new JSONObject(user);
@@ -114,7 +119,7 @@ public class Recotap{
             String json = jsonArray.toString();
 
 
-            Integer response = post(API_URL, json , "Bearer " + token.getString("token"));
+            response = post(API_URL, json , "Bearer " + token.getString("token"));
 
             Log.i("RecotapDetails " + 5, String.valueOf(response));
 
@@ -122,7 +127,7 @@ public class Recotap{
             e.printStackTrace();
         }
 
-
+        return response;
     }
 
 

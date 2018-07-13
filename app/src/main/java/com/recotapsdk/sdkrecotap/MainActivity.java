@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.recotapsdk.recotap_sdk.Recotap;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         Button button = (Button)findViewById(R.id.click);
+        final TextView response = (TextView) findViewById(R.id.response);
 
         final Recotap recotap = new Recotap("nGaMdfY59CRfMy0n8YBAmDdUGpV8Tu");
 
@@ -55,8 +57,11 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recotap.login(loginDetails);
-                recotap.logout(logoutDetails);
+                Integer loginTest, logoutTest;
+                loginTest = recotap.login(loginDetails);
+                logoutTest = recotap.logout(logoutDetails);
+
+                response.setText(String.valueOf(loginTest) +" "+ String.valueOf(logoutTest));
             }
         });
 
