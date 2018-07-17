@@ -1,10 +1,15 @@
 package com.recotapsdk.sdkrecotap;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +25,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_VIDEO_APP_PERM = 124;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
         final Recotap recotap = new Recotap("nGaMdfY59CRfMy0n8YBAmDdUGpV8Tu");
 
-        recotap.getInstance(this);
+        recotap.getInstance(this, getApplicationContext());
+
+        try {
+            ApplicationInfo ai = getApplicationContext().getPackageManager().getApplicationInfo(getApplicationContext().getPackageName(), PackageManager.GET_META_DATA);
+            Bundle bundle = ai.metaData;
+            user_id = bundle.getString("RECOTAP_ACCOUNT_ID");
+
+            Log.e("RecotapDetails", user_id);
+        } catch (Exception e) {
+            Log.e("RecotapDetails", "CONFIGURE NEEDED!");
+        }
 
         final HashMap<String, String> loginDetails = new HashMap<>();
-        loginDetails.put("user_id", "12345");
+        loginDetails.put("user_id", user_id);
         loginDetails.put("username", "Souptik");
         loginDetails.put("email", "souptik@impel.io");
         loginDetails.put("age", "49");

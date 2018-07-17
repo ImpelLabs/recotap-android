@@ -11,6 +11,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="RECOTAP_ACCOUNT_ID"
+            android:value="Something1234" />
+
+        <meta-data
+            android:name="RECOTAP_CLIENT_ID"
+            android:value="01U11SeHvN1JuqI" />
+
+        <meta-data
+            android:name="RECOTAP_CLIENT_SECRET"
+            android:value="WZdoawHBBjjtWQ6mIiYpYLk2C" />
+
+        <meta-data
+            android:name="RECOTAP_TOKEN_URL"
+            android:value="https://testapi.recotap.com/v1/oauth/token?key=CC7LyIcNj5VYpTjW8n85fuFFkv7Ygg" />
+
+        <meta-data
+            android:name="RECOTAP_ENDPOINT_URL"
+            android:value="https://testapi.recotap.com/v1/api/events" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
