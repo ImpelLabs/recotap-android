@@ -96,20 +96,15 @@ public class Recotap extends Activity{
         Integer test = null;
 
         try {
-
             JSONObject jsonObject = new JSONObject(loginDetails);
             JSONArray jsonArray = new JSONArray();
-
             if (getToken != null) {
                 token = new JSONObject(getToken);
                 jsonArray.put(jsonObject);
-
                 String json = jsonArray.toString();
-
                 test= post(API_URL, json, "Bearer " + token.getString("token"));
                 Log.i("RecotapDetails " + 3.5, String.valueOf(test));
             }
-
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
@@ -117,33 +112,42 @@ public class Recotap extends Activity{
         return test;
     }
 
-    public void emit(String eventName, HashMap eventData) {
-        JSONObject jsonObject = new JSONObject(eventData);
-        Log.i("RecotapDetails " + 4, eventName + " " + String.valueOf(jsonObject));
+    public Integer emit(HashMap eventData) {
+
+        Integer response = null;
+        try {
+            JSONObject jsonObject = new JSONObject(eventData);
+            JSONArray jsonArray = new JSONArray();
+            token = new JSONObject(getToken);
+            jsonArray.put(jsonObject);
+
+            String json = jsonArray.toString();
+            response = post(API_URL, json , "Bearer " + token.getString("token"));
+            Log.i("RecotapDetails " + 4, String.valueOf(response));
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return response;
+
     }
 
     public Integer logout(HashMap user) {
 
         Integer response = null;
-
         try {
             JSONObject jsonObject = new JSONObject(user);
             JSONArray jsonArray = new JSONArray();
-
             token = new JSONObject(getToken);
             jsonArray.put(jsonObject);
 
             String json = jsonArray.toString();
-
-
             response = post(API_URL, json , "Bearer " + token.getString("token"));
-
             Log.i("RecotapDetails " + 5, String.valueOf(response));
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-
         return response;
     }
 

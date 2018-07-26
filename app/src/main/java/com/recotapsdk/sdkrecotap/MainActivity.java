@@ -59,13 +59,20 @@ public class MainActivity extends AppCompatActivity {
         loginDetails.put("age", "49");
         loginDetails.put("gender", "M");
 
-        HashMap<String, String> eventDetails = new HashMap<>();
-        eventDetails.put("video_id", "12345");
-        eventDetails.put("session_id", "lsdfjlaskdjf");
+        HashMap<String, String> events = new HashMap<>();
+        events.put("video_id", "12345");
+        events.put("session_id", "lsdfjlaskdjf");
 
-        recotap.emit("Video Played", eventDetails);
-        recotap.emit("Video Paused", eventDetails);
-        recotap.emit("Video Stopped", eventDetails);
+        final HashMap<String, HashMap> eventDetails = new HashMap<>();
+        eventDetails.put("Video Played", events);
+        eventDetails.put("Video Paused", events);
+        eventDetails.put("Video Stopped", events);
+
+//        recotap.emit(eventDetails);
+
+//        recotap.emit("Video Played", events);
+//        recotap.emit("Video Paused", eventDetails);
+//        recotap.emit("Video Stopped", eventDetails);
 
         final HashMap<String, String> logoutDetails = new HashMap<>();
         logoutDetails.put("12345", "Logged Out");
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Integer loginTest, logoutTest;
-                loginTest = recotap.login(loginDetails);
+                loginTest = recotap.emit(eventDetails);
                 logoutTest = recotap.logout(logoutDetails);
 
                 response.setText(String.valueOf(loginTest) +" "+ String.valueOf(logoutTest));
