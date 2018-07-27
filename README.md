@@ -51,38 +51,47 @@ You can send login data to server using HashMap with the properties. You have to
 
 ```
 HashMap<String, String> loginDetails = new HashMap<>();
-        loginDetails.put("user_id", "12345");
-        loginDetails.put("username", "Name");
-        loginDetails.put("email", "example@impel.io");
-        loginDetails.put("age", "30");
-        loginDetails.put("gender", "M");
+loginDetails.put("user_id", "12345");
+loginDetails.put("username", "Name");
+loginDetails.put("email", "example@impel.io");
+loginDetails.put("age", "30");
+loginDetails.put("gender", "M");
 
 recotap.login(loginDetails);
 ```
 
-To know if the user logged out or not use recotap.logout method
+To know if the user logged out or not use **recotap.logout** method
 ```
 HashMap<String, String> logoutDetails = new HashMap<>();
-        logoutDetails.put(user_id, "Logged Out");
+logoutDetails.put(user_id, "Logged Out");
         
 recotap.logout(logoutDetails);
 ```
 
-To send event data you have 3 options.
+To send event data you have many options.
+But first you need to gather event information in **HashMap**
 
 ```
-HashMap<String, String> eventDetails = new HashMap<>();
-        eventDetails.put("video_id", "12345");
-        eventDetails.put("session_id", "lsdfjlaskdjf");
+HashMap<String, String> events = new HashMap<>();
+events.put("video_id", "12345");
+events.put("session_id", "lsdfjlaskdjf");
+```
+Then you need to combine the eventDetails in another **HashMap** witn your **Event Name**
 
+```
+HashMap<String, HashMap> eventDetails = new HashMap<>();
 // Use when Video is playing
-recotap.emit("Video Played", eventDetails);
+eventDetails.put("Video Played", events);
 
 // Use when Video is Paused
-recotap.emit("Video Paused", eventDetails);
+eventDetails.put("Video Paused", events);
 
 // Use when Video is Stopped
-recotap.emit("Video Stopped", eventDetails);
-
+eventDetails.put("Video Stopped", events);
+```
+Use **recotap.emit** method to push the data to server
+```
+// Then call the methods like below
+recotap.emit(eventDetails);
 ```
 
