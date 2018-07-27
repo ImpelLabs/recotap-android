@@ -8,11 +8,11 @@ You can install it automatically using Gradle in Android Studio. Just add these 
 Add it in your root build.gradle at the end of repositories:
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 
 And add the dependency
@@ -34,6 +34,7 @@ Now add these permissions in the AndroidManifest.xml file
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 # STEP 3: Add Meta-Data to the AndroidManifest.xml
+These meta-data are required to talk to the library. Configure the **android:value** value as given by the recotap.
 
 ```
 <meta-data
