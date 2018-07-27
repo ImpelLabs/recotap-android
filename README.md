@@ -33,8 +33,29 @@ Now add these permissions in the AndroidManifest.xml file
 <!-- Recommended so that Recotap knows when to attempt a network call -->
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
+# STEP 3: Add Meta-Data to the AndroidManifest.xml
 
+```
+<meta-data
+    android:name="RECOTAP_ACCOUNT_ID"
+    android:value="Something1234" />
 
+<meta-data
+    android:name="RECOTAP_CLIENT_ID"
+    android:value="11SeHv" />
+
+<meta-data
+    android:name="RECOTAP_CLIENT_SECRET"
+    android:value="WjjtYpYLkC" />
+
+<meta-data
+    android:name="RECOTAP_TOKEN_URL"
+    android:value="https://testapi.recotap.com/v1/oauth/token?key=(tokenKey)" />
+
+<meta-data
+    android:name="RECOTAP_ENDPOINT_URL"
+    android:value="https://testapi.recotap.com/(PATH)" />
+```
 
 # Step 4: Initialize the CleverTap SDK
 
