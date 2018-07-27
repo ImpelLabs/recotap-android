@@ -16,6 +16,7 @@ allprojects {
 ```
 
 And add the dependency
+**NOTE: Please check for the latest version in the releases**
 ```
 dependencies {
     ...
@@ -76,7 +77,7 @@ HashMap<String, String> events = new HashMap<>();
 events.put("video_id", "12345");
 events.put("session_id", "lsdfjlaskdjf");
 ```
-Then you need to combine the eventDetails in another **HashMap** witn your **Event Name**
+Then you need to combine the eventDetails in another **HashMap** with your **Event Name**
 
 ```
 HashMap<String, HashMap> eventDetails = new HashMap<>();
